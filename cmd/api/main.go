@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai"
+	dsn := "host=localhost user=to_do_list password=to_do_list dbname=to_do_list port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	port := ":8080"
 
 	gormDB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -37,6 +37,11 @@ func main() {
 		AllowHeaders:     []string{"Accept", "Authorization", "Content-Type"},
 		AllowCredentials: true, // Enable cookies/auth
 	}))
+
+	route.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong"})
+	})
 
 	rest.NewUserController(route, userService)
 
