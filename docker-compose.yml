@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: to_do_list
       POSTGRES_PASSWORD: to_do_list
     ports:
-      - "0.0.0.0:5432"
+      - "5432:5432"
     volumes:
       - psql_volume_bp:/var/lib/postgresql/data
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"to_do_project/internal/application/services"
 	postgres2 "to_do_project/internal/infras/db/postgres"
@@ -37,6 +38,11 @@ func main() {
 		AllowHeaders:     []string{"Accept", "Authorization", "Content-Type"},
 		AllowCredentials: true, // Enable cookies/auth
 	}))
+
+	route.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"timeUnix": time.Now().Unix()})
+	})
 
 	route.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
